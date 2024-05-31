@@ -1,0 +1,5 @@
+# Node modules
+node_modules/
+
+# Directorio de entorno de producción
+.env
