@@ -23,7 +23,7 @@ app.use(express.json({ extended: false }));
 
 // Configurar CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Cambia esto al origen de tu aplicación frontend
+  origin: 'https://sc-frontend-h5h1.onrender.com', // Cambia esto al origen de tu aplicación frontend
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -44,7 +44,7 @@ const server = http.createServer(app);
 // Configurar Socket.IO
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000', // Cambia esto al origen de tu aplicación frontend
+    origin: 'https://sc-frontend-h5h1.onrender.com', // Cambia esto al origen de tu aplicación frontend
     methods: ['GET', 'POST'],
     credentials: true,
   },
