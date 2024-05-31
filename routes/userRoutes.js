@@ -122,7 +122,6 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
       res.status(500).send('Server error');
     }
   }
@@ -198,7 +197,6 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
       res.status(500).send('Server error');
     }
   }
@@ -234,7 +232,6 @@ router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -272,24 +269,19 @@ router.get('/profile', auth, async (req, res) => {
     }
     res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
 
 // Obtener un usuario por ID
 router.get('/:userId', auth, async (req, res) => {
-  console.log(`Fetching profile for user ID: ${req.params.userId}`); // Log del ID de usuario
   try {
     const user = await User.findById(req.params.userId).select('-password');
     if (!user) {
-      console.log('User not found');
       return res.status(404).json({ msg: 'User not found' });
     }
-    console.log('User found:', user);
     res.json(user);
   } catch (err) {
-    console.error('Server Error:', err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -344,7 +336,6 @@ router.put('/profile', [auth, [
   }
 
   const { name, email, skills } = req.body;
-  console.log('Received skills:', skills);
 
   try {
     const user = await User.findById(req.user.id);
@@ -363,12 +354,10 @@ router.put('/profile', [auth, [
         return res.status(400).json({ msg: 'Skills must be an array or a comma-separated string' });
       }
     }
-    console.log('Updated user skills:', user.skills);
 
     await user.save();
     res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });

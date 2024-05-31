@@ -26,7 +26,6 @@ router.post(
       const question = await newQuestion.save();
       res.json(question);
     } catch (err) {
-      console.error(err.message);
       res.status(500).send('Server Error');
     }
   }
@@ -38,7 +37,6 @@ router.get('/', auth, async (req, res) => {
     const questions = await Question.find().sort({ date: -1 });
     res.json(questions);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });

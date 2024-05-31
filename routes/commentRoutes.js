@@ -41,7 +41,6 @@ router.post(
 
       res.json(populatedComment);
     } catch (err) {
-      console.error(err.message);
       res.status(500).send('Server Error');
     }
   }
@@ -53,7 +52,6 @@ router.get('/:postId', auth, async (req, res) => {
     const comments = await Comment.find({ post: req.params.postId }).sort({ date: -1 }).populate('user', ['name']);
     res.json(comments);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });

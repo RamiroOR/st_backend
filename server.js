@@ -34,7 +34,6 @@ app.use('/api/posts', require('./routes/postRoutes'));
 app.use('/api/questions', require('./routes/questionRoutes'));
 app.use('/api/comments', require('./routes/commentRoutes'));
 app.use('/api/likes', require('./routes/likeRoutes'));
-app.use('/api/notifications', require('./routes/notificationRoutes'));
 
 // Swagger setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -54,12 +53,9 @@ const io = socketIo(server, {
 // Middleware de autenticación para Socket.IO
 io.use(socketAuth);
 
-io.on('connection', (socket) => {
-  console.log('Nuevo cliente conectado');
-  
+io.on('connection', (socket) => {  
   // Puedes guardar el ID de socket en la sesión del usuario para enviar notificaciones más tarde
   socket.on('disconnect', () => {
-    console.log('Cliente desconectado');
   });
 });
 
